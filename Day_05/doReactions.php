@@ -13,18 +13,16 @@
     }
 
     $hasReacted = false;
-    $newPolymer = [];
-    
     $len = count($polymer);
     for ($i=0; $i < $len; $i++) {
       $nextChar = $i + 1 < $len ? $polymer[$i + 1] : false;
       if ($nextChar && canReact($polymer[$i], $nextChar)) {
+        $polymer[$i] = false;
+        $polymer[$i + 1] = false;
         $hasReacted = $i++;
-      } else {
-        $newPolymer[] = $polymer[$i];
       }
     }
 
-    return doReactions($newPolymer, $hasReacted);
+    return doReactions(array_values(array_filter($polymer)), $hasReacted);
   }
 ?>
