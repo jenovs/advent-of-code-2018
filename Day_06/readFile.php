@@ -8,5 +8,7 @@ while(!feof($file)) {
 
 fclose($file);
 
-return array_filter($array);
+return array_filter(array_map(function($val) {
+  return array((int)$val[0], (int)$val[1]);
+}, $array));
 ?>
